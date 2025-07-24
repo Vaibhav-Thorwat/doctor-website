@@ -28,14 +28,16 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--dark-text);
     font-weight: 700;
 }
-
+.top-container{
+    margin-left: 2%;
+    margin-right: 2%;
+}
 /* Top Info Bar */
 .top-info-bar {
     background-color: var(--white);
@@ -51,8 +53,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .top-info-content .logo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: auto; /* This ensures the logo stays on the left */
 }
 
 .top-info-content .logo img {
