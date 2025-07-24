@@ -233,7 +233,15 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0; /* Remove bottom margin to control spacing with button */
     color: var(--light-text);
 }
+.baby-image {
+    flex: 1 1 45%;
+}
 
+.baby-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px; /* optional for soft edges */
+}
 .hero-text .btn {
     margin-top: 28px;   /* Space above button */
     margin-bottom: 0;   /* No extra space below button */
@@ -1290,4 +1298,314 @@ iframe {
         flex-direction: column;
         gap: 20px;
     }
+}
+
+@media (max-width: 768px) {
+  .top-info-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .top-info-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 100px;
+  }
+   .contact-item i {
+    font-size: 24px;
+    color: #ff6600; /* or your theme color */
+    margin-bottom: 5px;
+  }
+
+  .contact-item strong {
+    font-size: 12px;
+    margin-bottom: 2px;
+    font-weight: 600;
+    color: #2c3e50;
+  }
+
+  .contact-item span {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 768px) {
+    .faq-appointment-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .appointment-form-section {
+        padding: 30px 25px;
+    }
+    
+    .testimonials-carousel-container {
+        padding: 0 60px;
+    }
+    
+    .testimonial-card {
+        min-width: auto;
+        max-width: 100%;
+    }
+    
+    .simple-approach-content {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .simple-approach-image {
+        flex: none;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .services-carousel-container {
+        padding: 0 60px;
+    }
+    
+    .carousel-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        padding: 10px;
+    }
+    
+    .left-arrow {
+        left: 10px;
+    }
+    
+    .right-arrow {
+        right: 10px;
+    }
+    
+    .service-card {
+        flex: 0 0 280px;
+    }
+    
+    .top-contact-details {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .about-doctor-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .doctor-image-wrapper {
+        flex: none;
+        width: 300px;
+        height: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .faq-section h2, .appointment-form-section h2 {
+        font-size: 28px;
+    }
+    
+    .testimonials-header h2 {
+        font-size: 30px;
+    }
+    
+    .simple-approach-text h2 {
+        font-size: 30px;
+    }
+    
+    .accordion-header {
+        padding: 18px 20px;
+        font-size: 16px;
+    }
+    
+    .accordion-content p {
+        font-size: 14px;
+    }
+    
+    .testimonial-card {
+        padding: 25px;
+    }
+    
+    .testimonials-carousel-container {
+        padding: 0 50px;
+    }
+    
+    .services-carousel-container {
+        padding: 0 50px;
+    }
+    
+    .service-card {
+        flex: 0 0 260px;
+    }
+    
+    .hero-text h1 {
+        font-size: 36px;
+    }
+    
+    .quick-links-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+@media (max-width: 768px) {
+  .navbar-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    margin: 15px 0 0;
+  }
+}
+@media (max-width: 768px) {
+  .hero-section {
+    height: auto;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .hero-text {
+    padding-right: 0;
+    margin: 0 auto;
+  }
+
+  .baby-image {
+    order: -1;
+    text-align: center;
+  }
+
+  .baby-image img {
+    max-width: 80%;
+    height: auto;
+  }
+}/* General mobile footer layout */
+@media (max-width: 768px) {
+  .footer-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px; /* spacing between columns */
+    padding: 20px;
+  }
+
+  .footer-col {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 0;
+  }
+
+  .footer-col h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .footer-col p,
+  .footer-col a {
+    font-size: 14px;
+  }
+
+  .footer-social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .footer-social-icons a {
+    font-size: 20px;
+  }
+
+  /* Quick links section */
+  .quick-links-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .link-box {
+    width: 90%;
+    max-width: 400px;
+    background-color: var(--light-blue-bg);
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .link-box ul {
+    padding-left: 0;
+  }
+
+  .link-box ul li {
+    list-style: none;
+    margin: 8px 0;
+  }
+
+  .link-box ul li a {
+    text-decoration: none;
+    color: var(--dark-text);
+    font-size: 14px;
+  }
+
+  /* Optional: copyright or bottom footer */
+  .footer-bottom {
+    font-size: 12px;
+    margin-top: 20px;
+    text-align: center;
+    color: var(--light-text);
+  }
+  .footer-col:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+
+}
+
+@media (max-width: 360px) {
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .hero-text p {
+    font-size: 15px;
+  }
+
+  .service-card {
+    flex: 0 0 240px;
+  }
+
+  .testimonial-card {
+    padding: 20px;
+  }
+
+  .appointment-form input,
+  .appointment-form textarea {
+    font-size: 14px;
+  }
 }
