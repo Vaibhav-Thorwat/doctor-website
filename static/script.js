@@ -551,4 +551,17 @@ document.addEventListener('DOMContentLoaded', () => {
     createMobileMenu();
 
     console.log('All website functionality initialized successfully!');
+
+    // Initialize map at Maharashtra, India
+var map = L.map('map').setView([19.7515, 75.7139], 6);
+
+// Add OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Add a marker
+var marker = L.marker([19.7515, 75.7139]).addTo(map);
+marker.bindPopup("<b>Welcome!</b><br>This is Maharashtra.").openPopup();
+
 });
