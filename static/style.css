@@ -1508,3 +1508,40 @@ iframe {
         padding-bottom: 15px;
     }
 }
+
+
+@media (max-width: 768px) {
+  .service-modal-content {
+    flex-direction: column;
+    height: auto;
+    width: 80%;
+  }
+
+  .modal-body {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .modal-image,
+  .modal-text {
+    flex: none;
+    width: 100%;
+    height: auto;
+  }
+
+  .modal-image img {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+  }
+
+  .modal-text {
+    padding: 0;
+  }
+
+  .modal-text .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
