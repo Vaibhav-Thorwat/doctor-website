@@ -565,3 +565,54 @@ var marker = L.marker([19.7515, 75.7139]).addTo(map);
 marker.bindPopup("<b>Welcome!</b><br>This is Maharashtra.").openPopup();
 
 });
+// Modal logic for service cards
+const serviceCards = document.querySelectorAll('.service-card');
+const modal = document.getElementById('serviceModal');
+const modalImage = document.getElementById('modalImage');
+const modalTitle = document.getElementById('modalTitle');
+const modalDescription = document.getElementById('modalDescription');
+const closeModal = document.querySelector('.close-modal');
+
+serviceCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const img = card.getAttribute('data-img');
+        const title = card.getAttribute('data-title');
+        const desc = card.getAttribute('data-desc');
+
+        modalImage.src = img;
+        modalTitle.textContent = title;
+        modalDescription.textContent = desc;
+
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+const bookBtn = document.querySelector('#serviceModal .btn');
+bookBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevent default anchor behavior
+    modal.style.display = 'none'; // Close modal
+    document.body.style.overflow = 'auto'; // Restore scroll
+
+    // Scroll to the appointment section
+    const appointmentSection = document.getElementById('appointment');
+    if (appointmentSection) {
+        const navbarHeight = document.querySelector('.navbar').offsetHeight + 
+                             document.querySelector('.top-info-bar').offsetHeight;
+        window.scrollTo({
+            top: appointmentSection.offsetTop - navbarHeight,
+            behavior: 'smooth'
+        });
+    }
+});
