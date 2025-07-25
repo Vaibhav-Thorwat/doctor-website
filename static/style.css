@@ -1122,6 +1122,13 @@ iframe {
     margin-top: 5px;
 }
 
+.footer-heads{
+    text-decoration: none;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 20px;
@@ -1399,6 +1406,35 @@ iframe {
     }
 }
 
+@media (max-width: 768px) {
+  .service-card {
+    max-width: 90%;
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .service-card p{
+    font-size: 14px;
+    line-height: 1.5;
+    padding-bottom: 20px;
+    overflow: visible;
+    white-space: normal;
+  }
+ .service-card h3{
+    font-size: 20px;
+    line-height: 1.5;
+    padding-bottom: 20px;
+    overflow: visible;
+    white-space: normal;
+  }
+  .services-grid {
+    gap: 20px;
+  }
+
+  .services-carousel-wrapper {
+    padding: 0 20px;
+  }
+}
 @media (max-width: 768px) {
     .hero-section {
         height: auto;
