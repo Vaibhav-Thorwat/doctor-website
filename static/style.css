@@ -41,6 +41,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 2%;
 }
 
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: #fff; /* to avoid transparency issues */
+}
+
 /* Top Info Bar */
 .top-info-bar {
     background-color: var(--white);
@@ -831,7 +838,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Testimonials Section */
 .testimonials-section {
     position: relative;
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    background: linear-gradient(135deg, var(--light-blue-bg) 0%, #b3e5fc 100%) ;
     padding: 80px 0;
     color: var(--white);
     text-align: center;
@@ -857,7 +864,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .testimonials-header h2 {
-    color: var(--white);
+    color: var(--primary-blue);
     font-size: 36px;
     font-weight: 700;
     margin-bottom: 10px;
