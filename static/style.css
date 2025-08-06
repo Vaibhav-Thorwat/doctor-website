@@ -48,11 +48,37 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #fff; /* to avoid transparency issues */
 }
 
+/.top-container {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #fff;
+}
+
+/* Top Info Bar */
+.top-container {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #fff;
+}
+
 /* Top Info Bar */
 .top-info-bar {
     background-color: var(--white);
     padding: 15px 0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: block; /* Visible by default in desktop view */
 }
 
 .top-info-content {
@@ -66,7 +92,6 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    margin-right: auto;
 }
 
 .top-info-content .logo img {
@@ -106,13 +131,6 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
 }
 
-.contact-item span {
-    font-weight: 600;
-    color: var(--main-purple);
-    margin-bottom: 2px;
-    display: block;
-}
-
 .contact-item p {
     margin: 0;
     font-size: 14px;
@@ -135,7 +153,6 @@ h1, h2, h3, h4, h5, h6 {
     list-style: none;
     display: flex;
     gap: 30px;
-    margin-right: auto;
 }
 
 .nav-links a {
@@ -169,21 +186,156 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--orange);
 }
 
-.social-icons {
+/* Mobile Header */
+.mobile-header {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #0b80b3;
+    padding: 10px 0;
+}
+
+.mobile-header .logo {
     display: flex;
-    gap: 15px;
+    align-items: center;
 }
 
-.social-icons a {
-    color: var(--white);
+.mobile-header .logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.mobile-header .logo-text {
+    color: #fff;
+    font-weight: 700;
     font-size: 18px;
-    transition: color 0.3s ease;
 }
 
-.social-icons a:hover {
+.mobile-header .logo-text span {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    color: #ddd;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* Toggle Menu */
+.toggle-menu {
+    display: none;
+    width: 100%;
+    background-color: #0b80b3;
+}
+
+.toggle-menu.active {
+    display: flex;
+    flex-direction: column; /* Vertical column layout */
+}
+
+.toggle-menu .top-info-bar {
+    display: block;
+    padding: 15px;
+    width: 100%;
+}
+
+.toggle-menu .top-info-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.toggle-menu .top-contact-details {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.toggle-menu .nav-links {
+    display: flex;
+    flex-direction: column;
+    width: 100;
+    padding: 0;
+    list-style: none;
+}
+
+.toggle-menu .nav-links li {
+    width: 100%;
+}
+
+.toggle-menu .nav-links a {
+    display: block;
+    padding: 10px 15px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none; /* Ensure links are clickable */
+}
+
+.toggle-menu .nav-links a.active {
     color: var(--orange);
 }
 
+.toggle-menu .nav-links a:hover {
+    color: var(--orange); /* Optional: Add hover effect for better UX */
+}
+
+.toggle-menu .nav-links a::after {
+    display: none;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .top-info-bar {
+        display: none; /* Hide default top info bar in mobile view */
+    }
+
+    .navbar-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mobile-header {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none; /* Hide default nav links in mobile view */
+    }
+
+    .top-info-content .logo img {
+        height: 40px;
+    }
+
+    .mobile-header .logo img {
+        height: 40px;
+    }
+}
+
+/* Desktop View */
+@media (min-width: 769px) {
+    .top-info-bar {
+        display: block; /* Ensure top info bar is visible in desktop */
+    }
+
+    .nav-links {
+        display: flex; /* Ensure nav links are visible in desktop */
+    }
+
+    .mobile-header {
+        display: none;
+    }
+
+    .toggle-menu {
+        display: none !important; /* Ensure toggle menu is hidden in desktop */
+    }
+}
 /* Hero Section */
 .hero-section {
     position: relative;
@@ -834,6 +986,51 @@ h1, h2, h3, h4, h5, h6 {
 .appointment-form .btn:hover {
     background-color: #0a6d99;
 }
+.appointment-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--dark-text);
+    background-color: #fff;
+    appearance: none; /* Removes default browser arrow (optional) */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%230b80b3" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    cursor: pointer;
+}
+.faq-appointment-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(210, 194, 194, 0.1);
+    z-index: 1;
+}
+.appointment-container {
+    position: relative;
+    z-index: 2; /* Ensure it sits above the overlay */
+}
+.datetime-row {
+    display: flex;
+    gap: 15px; /* space between date and time */
+    flex-wrap: wrap; /* ensures responsiveness on smaller screens */
+}
+
+.datetime-row input[type="date"],
+.datetime-row input[type="time"] {
+    flex: 1;
+    min-width: 150px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--dark-text);
+    background-color: #fff;
+}
 
 /* Testimonials Section */
 .testimonials-section {
@@ -1183,18 +1380,18 @@ iframe {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .top-info-content {
+    /* .top-info-content {
         flex-direction: column;
         align-items: center;
         text-align: center;
     }
 
     .top-contact-details {
-        flex-direction: row; /* Horizontal layout for contact details */
+        flex-direction: row; 
         justify-content: center;
         align-items: center;
-        gap: 20px; /* Reduced gap for better spacing */
-        flex-wrap: wrap; /* Allow wrapping if needed */
+        gap: 20px; 
+        flex-wrap: wrap; 
         margin-top: 15px;
     }
 
@@ -1203,51 +1400,51 @@ iframe {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        max-width: 120px; /* Slightly increased for readability */
-        min-width: 100px; /* Ensure consistent sizing */
+        max-width: 120px; 
+        min-width: 100px; 
     }
 
     .contact-item i {
-        font-size: 20px; /* Smaller icon for mobile */
+        font-size: 20px; 
         color: var(--orange);
         margin-bottom: 5px;
     }
 
     .contact-item span {
-        font-size: 12px; /* Adjusted font size */
+        font-size: 12px; 
         font-weight: 600;
         color: var(--main-purple);
         margin-bottom: 2px;
     }
 
     .contact-item p {
-        font-size: 11px; /* Smaller font for phone/email */
+        font-size: 11px; 
         color: var(--light-text);
         line-height: 1.2;
     }
 
     .navbar-content {
-        flex-direction: column; /* Keep column for overall navbar structure */
-        align-items: center; /* Center content */
+        flex-direction: column; 
+        align-items: center;
     }
 
     .nav-links {
-        flex-direction: row; /* Horizontal layout for nav links */
-        justify-content: center; /* Center links horizontally */
-        gap: 15px; /* Reduced gap for mobile */
+        flex-direction: row; 
+        justify-content:
+        gap: 15px; 
         width: 100%;
         margin: 15px 0 0;
-        flex-wrap: wrap; /* Allow wrapping if needed */
+        flex-wrap: wrap; 
     }
 
     .nav-links a {
-        font-size: 14px; /* Slightly smaller font for mobile */
-        padding: 5px 10px; /* Adjusted padding for tighter fit */
+        font-size: 14px; 
+        padding: 5px 10px; 
     }
 
     .nav-links a::after {
-        height: 1px; /* Thinner underline for mobile */
-    }
+        height: 1px; 
+    } */
 
     .appointment-container {
         flex-direction: row; /* Horizontal layout for appointment section */
