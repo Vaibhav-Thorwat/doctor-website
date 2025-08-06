@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="sticky-header">
-    <!-- Top Info Bar -->
+    <!-- Top Info Bar (Visible on Desktop) -->
     <div class="top-info-bar">
         <div class="top-container">
             <div class="top-info-content">
@@ -25,17 +25,14 @@
                 <div class="top-contact-details">
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
-                        <span>Call Us</span>
                         <p>+91 8459333946</p>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-clock"></i>
-                        <span>Working Hours</span>
                         <p>Mon-Fri: 8AM-6PM</p>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>Email</span>
                         <p>prajubkadam@gmail.com</p>
                     </div>
                 </div>
@@ -43,10 +40,22 @@
         </div>
     </div>
 
-    <!-- Navbar -->
+    <!-- Navbar with Toggle Menu -->
     <nav class="navbar">
         <div class="top-container">
             <div class="navbar-content">
+                <div class="mobile-header">
+                    <div class="logo">
+                        <img src="../static/doctor_logo.png" alt="Dr. Naigude's Clinic Logo">
+                        <div class="logo-text">
+                            Vithai Child Care Clinic
+                            <span>Pediatric Care Excellence</span>
+                        </div>
+                    </div>
+                    <button class="toggle-button" aria-label="Toggle Menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
                 <ul class="nav-links">
                     <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -54,6 +63,40 @@
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#appointment">Appointment</a></li>
                 </ul>
+                <div class="toggle-menu">
+                    <div class="top-info-bar">
+                        <div class="top-info-content">
+                            <div class="logo">
+                                <img src="../static/doctor_logo.png" alt="Dr. Naigude's Clinic Logo">
+                                <div class="logo-text">
+                                    Vithai Child Care Clinic
+                                    <span>Pediatric Care Excellence</span>
+                                </div>
+                            </div>
+                            <div class="top-contact-details">
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <p>+91 8459333946</p>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-clock"></i>
+                                    <p>Mon-Fri: 8AM-6PM</p>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <p>prajubkadam@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav-links">
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#appointment">Appointment</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -64,7 +107,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h3>Welcome to Dr. Naigude's Clinic</h3>
+                    <h3>Welcome to Vithai Childcare Clinic</h3>
                     <h1>Expert Pediatric Care for Your Child</h1>
                     <p>Providing comprehensive healthcare services for children with compassion, expertise, and state-of-the-art medical facilities. Your child's health is our priority.</p>
                     <a href="#appointment" class="btn primary-btn">Book Appointment <i class="fas fa-arrow-right"></i></a>
@@ -104,18 +147,18 @@
                     <img src="../static/DR_prajakta.jpg" alt="Dr. Prajakta Naigude">
                 </div>
                 <div class="doctor-details">
-                    <h2>Dr. Prajakta Naigude</h2>
-                    <p class="qualification">MD, Pediatrics | 15+ Years Experience</p>
-                    <p class="qualification">Board Certified Pediatrician</p>
+                    <h2>Dr. Prajakta Kadam Naigude</h2>
+                    <p class="qualification">MBBS, DCH, DNB, PEDIATRICS | 8+ Years Experience</p>
+                    <p class="qualification">Certified Lactation Professional</p>
                     <p class="description">
-                        Dr. Naigude is a highly experienced pediatrician dedicated to providing exceptional healthcare for children. With over 15 years of practice, she specializes in preventive care, developmental assessments, and treating various childhood conditions with a gentle, caring approach.
+                       Dr.Prajkta Naigude is a Certified Lactation Professional pediatrician dedicated to providing exceptional healthcare for children. With over 8 years of practice, she specializes in preventive care, developmental assessments, and treating various childhood conditions with a gentle, caring approach.
                     </p>
                     <a href="#contact" class="btn orange-btn">Schedule Consultation</a>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Our Main Services -->
     <section class="our-main-services" id="services">
         <div class="container">
@@ -314,6 +357,20 @@
                         <input type="text" name="name" placeholder="Your Name" required>
                         <input type="email" name="email" placeholder="Your Email" required>
                         <input type="tel" name="phone" placeholder="Phone Number" required>
+                        <select name="consultancyType" id="consultancyType" required>
+                        <option value="">Select Consultancy Type</option>
+                        <option value="offline">Offline</option>
+                        <option value="online">Online</option>
+                    </select>
+
+                    <div id="onlineFields" style="display: none;">
+                        <label for="onlineDate">Preferred Date & Time:</label>
+                        <div class="datetime-row">
+                            <input type="date" name="onlineDate" id="onlineDate">
+                            <input type="time" name="onlineTime" id="onlineTime" step="60">
+                        </div>
+                    </div>
+
                         <textarea name="message" placeholder="Your Message (Optional)" rows="4"></textarea>
                         <button type="submit" class="btn primary-btn">Submit Now</button>
                     </form>
