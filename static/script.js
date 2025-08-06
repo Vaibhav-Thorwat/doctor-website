@@ -616,3 +616,31 @@ bookBtn.addEventListener('click', (e) => {
         });
     }
 });
+const consultancySelect = document.getElementById('consultancyType');
+    const onlineFields = document.getElementById('onlineFields');
+
+    consultancySelect.addEventListener('change', () => {
+        if (consultancySelect.value === 'online') {
+            onlineFields.style.display = 'block';
+        } else {
+            onlineFields.style.display = 'none';
+        }
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.querySelector('.toggle-button');
+    const toggleMenu = document.querySelector('.toggle-menu');
+    const navLinks = document.querySelectorAll('.toggle-menu .nav-links a');
+
+    toggleButton.addEventListener('click', () => {
+        toggleMenu.classList.toggle('active');
+        const isActive = toggleMenu.classList.contains('active');
+        toggleButton.innerHTML = isActive ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            toggleMenu.classList.remove('active');
+            toggleButton.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+    });
+});
