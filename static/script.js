@@ -644,3 +644,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+const swiper = new Swiper('.swiper', {
+    slidesPerView: 4,
+    centeredSlides: true,
+    loop: true,
+    spaceBetween: 40,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
+    speed: 800,
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
