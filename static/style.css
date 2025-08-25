@@ -1247,7 +1247,25 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
+@media (max-width: 768px) {
+  .swiper-slide img {
+    height: 200px; /* smaller height for tablets */
+    border-radius: 8px;
+  }
+}
 
+/* Mobile screens */
+@media (max-width: 480px) {
+  .swiper-slide img {
+    width: 80%;
+    height: 200px; /* smaller height for mobile */
+    border-radius: 6px;
+  }
+
+  .swiper {
+    padding-bottom: 20px; /* reduce padding on mobile */
+  }
+}
 body {
     margin: 0;
     padding: 0;
