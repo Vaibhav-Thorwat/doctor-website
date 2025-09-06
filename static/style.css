@@ -48,144 +48,123 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #fff; /* to avoid transparency issues */
 }
 
-/.top-container {
-    margin-left: 2%;
-    margin-right: 2%;
-}
-
-.sticky-header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background-color: #fff;
-}
-
-/* Top Info Bar */
 .top-container {
-    margin-left: 2%;
-    margin-right: 2%;
-}
-
-.sticky-header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background-color: #fff;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 /* Top Info Bar */
 .top-info-bar {
-    background-color: var(--white);
-    padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    display: block; /* Visible by default in desktop view */
+  background-color: var(--white);
+  padding: 15px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  display: block; /* Visible by default in desktop view */
 }
 
 .top-info-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
 .top-info-content .logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .top-info-content .logo img {
-    height: 60px;
-    margin-right: 15px;
-    border-radius: 8px;
+  height: 60px;
+  margin-right: 15px;
+  border-radius: 8px;
 }
 
 .top-info-content .logo-text {
-    font-weight: 700;
-    font-size: 20px;
-    color: var(--main-purple);
-    line-height: 1.2;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--main-purple);
+  line-height: 1.2;
 }
 
 .top-info-content .logo-text span {
-    display: block;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--light-text);
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--light-text);
 }
 
 .top-contact-details {
-    display: flex;
-    gap: 50px;
+  display: flex;
+  gap: 50px;
 }
 
 .contact-item {
-    font-size: 15px;
-    text-align: center;
+  font-size: 15px;
+  text-align: center;
 }
 
 .contact-item i {
-    font-size: 22px;
-    color: var(--orange);
-    margin-bottom: 5px;
-    display: block;
+  font-size: 22px;
+  color: var(--orange);
+  margin-bottom: 5px;
+  display: block;
 }
 
 .contact-item p {
-    margin: 0;
-    font-size: 14px;
-    color: var(--light-text);
+  margin: 0;
+  font-size: 14px;
+  color: var(--light-text);
 }
 
 /* Navbar */
 .navbar {
-    background-color: #0b80b3;
-    padding: 15px 0;
+  background-color: #0b80b3;
+  padding: 15px 0;
 }
 
 .navbar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
+  list-style: none;
+  display: flex;
+  gap: 30px;
 }
 
 .nav-links a {
-    text-decoration: none;
-    color: var(--white);
-    font-weight: 500;
-    font-size: 16px;
-    padding: 5px 0;
-    position: relative;
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 500;
+  font-size: 16px;
+  padding: 5px 0;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
 .nav-links a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--orange);
-    transition: width 0.3s ease;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--orange);
+  transition: width 0.3s ease;
 }
 
 .nav-links a:hover::after,
 .nav-links a.active::after {
-    width: 100%;
+  width: 100%;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: var(--orange);
+  color: var(--orange);
 }
-
 /* Mobile Header */
 .mobile-header {
     display: none;
@@ -231,19 +210,46 @@ h1, h2, h3, h4, h5, h6 {
 /* Toggle Menu */
 .toggle-menu {
     display: none;
-    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    max-width: 400px;
+    height: 100vh;
     background-color: #0b80b3;
+    box-shadow: -2px 0 12px rgba(0,0,0,0.15);
+    z-index: 2000;
+    transition: transform 0.3s ease;
+}
+.close-toggle-menu 
+.menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.3);
+    z-index: 1999;
+}
+.menu-overlay.active {
+    display: block;
 }
 
 .toggle-menu.active {
     display: flex;
-    flex-direction: column; /* Vertical column layout */
+    flex-direction: column;
+    animation: slideInMenu 0.3s ease;
 }
 
+@keyframes slideInMenu {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+
 .toggle-menu .top-info-bar {
-    display: block;
-    padding: 15px;
-    width: 100%;
+    display: none;
 }
 
 .toggle-menu .top-info-content {
@@ -338,157 +344,175 @@ h1, h2, h3, h4, h5, h6 {
 }
 /* Hero Section */
 .hero-section {
-    position: relative;
-    height: 450px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    background: linear-gradient(135deg, var(--light-blue-bg) 0%, #b3e5fc 100%);
-    margin-bottom: 60px;
+  position: relative;
+  /* MODIFIED: Changed height to min-height and calculated based on viewport and header height. */
+  /* The header is 90px (top bar) + 46px (navbar) = 136px total. */
+  min-height: calc(100vh - 136px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(135deg, var(--light-blue-bg) 0%, #b3e5fc 100%);
+  /* MODIFIED: Removed margin-bottom to ensure the next section is flush against the fold. */
 }
 
 .hero-bg-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(224, 242, 254, 0.9) 55%, rgba(224, 242, 254, 0.6) 70%, transparent 100%);
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(224, 242, 254, 0.9) 55%,
+    rgba(224, 242, 254, 0.6) 70%,
+    transparent 100%
+  );
+  z-index: 1;
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
-    padding-left: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+  padding-left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .hero-text {
-    max-width: 550px;
-    margin-left: 0;
-    flex: 1 1 50%;
-    padding-right: 20px;
+  max-width: 550px;
+  margin-left: 0;
+  flex: 1 1 50%;
+  padding-right: 20px;
 }
 
 .hero-text h3 {
-    color: var(--primary-blue);
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
+  color: var(--primary-blue);
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .hero-section .container {
-    padding: 0 20px;
-    width: 100%;
+  padding: 0 20px;
+  width: 100%;
 }
 
 .hero-text h1 {
-    color: var(--dark-text);
-    font-size: 48px;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 20px;
+  color: var(--dark-text);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
 }
 
 .hero-text p {
-    font-size: 17px;
-    margin-bottom: 0;
-    color: var(--light-text);
+  font-size: 17px;
+  margin-bottom: 0;
+  color: var(--light-text);
 }
 
 .baby-image {
-    flex: 1 1 45%;
+  flex: 1 1 45%;
 }
 
 .baby-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
 }
 
 .hero-text .btn {
-    margin-top: 28px;
-    margin-bottom: 0;
-    display: inline-block;
+  margin-top: 28px;
+  margin-bottom: 0;
+  display: inline-block;
 }
 
 .btn {
-    display: inline-block;
-    padding: 12px 25px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: none;
-    cursor: pointer;
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: none;
+  cursor: pointer;
 }
 
 .primary-btn {
-    background-color: #0b80b3;
-    color: var(--white);
-    font-size: 16px;
-    position: relative;
-    overflow: hidden;
-    transform: translateY(0);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(11, 128, 179, 0.3);
+  background-color: #0b80b3;
+  color: var(--white);
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(11, 128, 179, 0.3);
 }
 
 .primary-btn:hover {
-    background-color: #0a6d99;
-    color: var(--white);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(11, 128, 179, 0.4);
+  background-color: #0a6d99;
+  color: var(--white);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(11, 128, 179, 0.4);
 }
 
 .primary-btn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(11, 128, 179, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(11, 128, 179, 0.3);
 }
-
+/* Quick Links Section */
 /* Quick Links Section */
 .quick-links {
-    padding-bottom: 50px;
+  /* --- MODIFIED --- */
+  /* Added padding-top to create space and push the blocks down */
+  /* instead of using a negative margin. */
+  padding: 60px 0 50px 0;
+  background-color: #f8f9fa; /* Added a subtle background for better separation */
 }
 
 .quick-links-grid {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  /* --- ADDED --- */
+  /* This ensures the grid is properly layered if needed. */
+  position: relative;
+  z-index: 1;
 }
 
 .link-box {
-    background-color: var(--orange);
-    color: var(--white);
-    padding: 30px;
-    border-radius: 8px;
-    text-align: center;
-    flex: 1;
-    max-width: 380px;
-    box-shadow: var(--box-shadow);
-    transition: transform 0.3s ease;
+  background-color: #fd7e14; /* Using a direct hex code for the orange color */
+  color: #ffffff;
+  padding: 30px;
+  border-radius: 12px; /* Slightly increased for a softer look */
+  text-align: center;
+  flex: 1;
+  max-width: 380px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added box-shadow to transition */
 }
 
 .link-box:hover {
-    transform: translateY(-8px);
+  /* --- MODIFIED --- */
+  /* Reduced the upward movement and added a stronger shadow for a "lift" effect. */
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
 .link-box h3 {
-    font-size: 22px;
-    margin-bottom: 15px;
-    font-weight: 600;
-    color: var(--white);
+  font-size: 22px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .link-box p {
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--white);
+  font-size: 15px;
+  line-height: 1.5;
+  color: #ffffff;
 }
 
 /* About Doctor Section */
@@ -581,22 +605,28 @@ h1, h2, h3, h4, h5, h6 {
 
 .services-carousel-container {
     position: relative;
-    max-width: 1200px;
+    /* --- MODIFIED --- */
+    /* Calculation: (3 cards * 300px wide) + (2 gaps * 30px) = 960px for content. */
+    /* Total width including padding for arrows: 960px + (2 * 80px padding) = 1120px. */
+    /* This makes the container perfectly fit 3 cards. */
+    max-width: 1120px;
     margin: 0 auto;
     padding: 0 80px;
 }
 
 .services-carousel-wrapper {
     position: relative;
-    overflow-x: auto;
+    /* --- MODIFIED --- */
+    /* Changed from 'auto' to 'hidden' to clip the partial 4th card from view. */
+    /* Scrolling functionality will still work via the arrows. */
+    overflow-x: hidden;
     white-space: nowrap;
     scroll-behavior: smooth;
     padding-bottom: 20px;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
 }
 
+/* This rule to hide the scrollbar is now redundant but harmless */
 .services-carousel-wrapper::-webkit-scrollbar {
     display: none;
 }
@@ -786,7 +816,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     border-radius: 8px;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
 }
 
 .modal-text {
@@ -1299,7 +1329,7 @@ iframe {
 }
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1.2fr;
+    grid-template-columns: 1.5fr 1.2fr 1.2fr;
     gap: 40px;
     margin-bottom: 40px;
 }
@@ -1338,12 +1368,26 @@ iframe {
     background-color: var(--orange);
     border-color: var(--orange);
 }
+
+/* --- MODIFIED SECTION --- */
+/* This now styles a simple, single-column list. */
 .footer-col.our-services ul {
     list-style: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    padding-left: 0;
+    margin: 0;
 }
+
+/* This adds consistent spacing between each item in the single column. */
+.footer-col.our-services ul li {
+    padding-bottom: 12px;
+}
+
+/* This removes the bottom padding from the very last item for perfect alignment. */
+.footer-col.our-services ul li:last-child {
+    padding-bottom: 0;
+}
+/* --- END MODIFIED SECTION --- */
+
 .footer-col.our-services ul li a {
     text-decoration: none;
     color: var(--footer-text-color);
@@ -1356,6 +1400,7 @@ iframe {
 .footer-col.our-services ul li i {
     color: var(--orange);
     margin-right: 8px;
+    font-size: 12px;
 }
 
 .footer-col.contact-details {
@@ -1377,6 +1422,7 @@ iframe {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 25px;
+    display: block;
 }
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -1386,6 +1432,66 @@ iframe {
     font-size: 14px;
 }
 
+/* --- MODIFIED SECTION --- */
+.footer-col.our-services ul {
+    list-style: none;
+    padding-left: 0; /* Remove default browser padding */
+    columns: 2; /* Create two balanced columns */
+    -webkit-columns: 2; /* Browser compatibility */
+    -moz-columns: 2; /* Browser compatibility */
+    column-gap: 20px;
+}
+
+.footer-col.our-services ul li {
+    padding-bottom: 12px; /* Add vertical spacing between items */
+    break-inside: avoid-column; /* Prevent a single item from splitting across columns */
+}
+/* --- END MODIFIED SECTION --- */
+
+.footer-col.our-services ul li a {
+    text-decoration: none;
+    color: var(--footer-text-color);
+    transition: color 0.3s ease;
+    display: inline-block; /* Helps with layout consistency */
+}
+.footer-col.our-services ul li a:hover {
+    color: var(--orange);
+}
+
+.footer-col.our-services ul li i {
+    color: var(--orange);
+    margin-right: 8px;
+    font-size: 12px; /* Slightly smaller icon */
+}
+
+.footer-col.contact-details {
+    align-self: start;
+}
+
+.footer-col.contact-details p {
+    display: flex;
+    align-items: flex-start;
+}
+
+.footer-col.contact-details p i {
+    margin-top: 5px;
+}
+
+.footer-heads{
+    text-decoration: none;
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    display: block; /* --- ADDED --- Ensures margin is applied correctly */
+}
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
 /* Fixed Social Buttons */
 .fixed-social-buttons {
     position: fixed;
