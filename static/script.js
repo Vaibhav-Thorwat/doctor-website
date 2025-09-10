@@ -204,18 +204,222 @@ document.addEventListener('DOMContentLoaded', () => {
     // ================= Appointment form =================
     const appointmentForm = document.getElementById('appointmentForm');
     if (appointmentForm) {
-        appointmentForm.addEventListener('submit', (e) => {
+        appointmentForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const formData = new FormData(appointmentForm);
-            const name = formData.get('name'), email = formData.get('email'), phone = formData.get('phone');
-            if (!name || !email || !phone) { alert('Please fill in all required fields.'); return; }
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) { alert('Please enter a valid email.'); return; }
-            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-            if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) { alert('Please enter a valid phone.'); return; }
-            alert('Thank you for your appointment request! We will contact you soon.');
-            appointmentForm.reset();
+            
+            // Show loading state
+            const submitButton = appointmentForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
+            
+            try {
+                const formData = new FormData(appointmentForm);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const phone = formData.get('phone');
+                const consultancyType = formData.get('consultancyType');
+                const onlineDate = formData.get('onlineDate');
+                const onlineTime = formData.get('onlineTime');
+                const message = formData.get('message');
+
+                // Validation
+                if (!name || !email || !phone || !consultancyType) {
+                    throw new Error('Please fill in all required fields.');
+                }
+                
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    throw new Error('Please enter a valid email address.');
+                }
+                
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                if (!phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+                    throw new Error('Please enter a valid phone number.');
+                }
+
+                // Validate online consultation fields
+                if (consultancyType === 'online') {
+                    if (!onlineDate || !onlineTime) {
+                        throw new Error('Please select date and time for online consultation.');
+                    }
+                    
+                    // Check if selected date is not in the past
+                    const selectedDateTime = new Date(`${onlineDate}T${onlineTime}`);
+                    const now = new Date();
+                    if (selectedDateTime <= now) {
+                        throw new Error('Please select a future date and time for online consultation.');
+                    }
+                }
+
+                // Prepare data object
+                const appointmentData = {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    consultancyType: consultancyType,
+                    onlineDate: onlineDate,
+                    onlineTime: onlineTime,
+                    message: message
+                };
+
+                // Submit to Google Forms first (primary)
+                let success = false;
+                try {
+                    await submitToGoogleForms(appointmentData);
+                    success = true;
+                    showSuccessMessage('Thank you for your appointment request! We will contact you soon.');
+                } catch (googleError) {
+                    console.warn('Google Forms submission failed, attempting local server as fallback:', googleError);
+                    // Fallback to Flask backend
+                    try {
+                        const response = await fetch('/submit-appointment', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(appointmentData)
+                        });
+                        if (response.ok) {
+                            const result = await response.json();
+                            if (result.success) {
+                                success = true;
+                                showSuccessMessage(result.message || 'Thank you for your appointment request! We will contact you soon.');
+                            } else {
+                                throw new Error(result.message || 'Server error occurred');
+                            }
+                        } else {
+                            throw new Error('Server response error');
+                        }
+                    } catch (flaskError) {
+                        console.error('Both Google Forms and local server submission failed:', flaskError);
+                        throw new Error('Unable to submit your request. Please try again or contact us directly at +91 8459333946.');
+                    }
+                }
+
+                if (success) {
+                    appointmentForm.reset();
+                    const onlineFieldsContainer = document.getElementById('onlineFields');
+                    if (onlineFieldsContainer) {
+                        onlineFieldsContainer.style.display = 'none';
+                    }
+                }
+
+            } catch (error) {
+                console.error('Form submission error:', error);
+                showErrorMessage(error.message);
+            } finally {
+                // Reset button state
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }
         });
+    }
+
+    // Helper function to submit to Google Forms
+    async function submitToGoogleForms(data) {
+        const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSfOOMCkYwttcvepDoEgOzQOCw0fQEm881apF0-e06a679-L-w/formResponse';
+        
+        const googleFormData = new FormData();
+        googleFormData.append('entry.573906072', data.name);
+        googleFormData.append('entry.1663572915', data.email);
+        googleFormData.append('entry.669286527', data.phone);
+        // Map consultancy type to match Google Form options exactly
+        const consultancyTypeMapping = {
+            'offline': 'Offline',
+            'online': 'Online'
+        };
+        googleFormData.append('entry.1209364589', consultancyTypeMapping[data.consultancyType] || data.consultancyType);
+        
+        // Handle date and time for online consultations
+        let dateTimeString = 'N/A';
+        if (data.consultancyType === 'online' && data.onlineDate && data.onlineTime) {
+            dateTimeString = `${data.onlineDate} at ${data.onlineTime}`;
+        }
+        const combinedMessage = data.message ? `${data.message} | Preferred: ${dateTimeString}` : dateTimeString;
+        googleFormData.append('entry.482941717', combinedMessage);
+
+        // Log the data being sent for debugging
+        console.log('🚀 Submitting to Google Form:', {
+            url: googleFormUrl,
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            consultancyType: data.consultancyType,
+            combinedMessage: combinedMessage
+        });
+
+        // Submit to Google Form with timeout and better error handling
+        return new Promise((resolve, reject) => {
+            const timeout = setTimeout(() => {
+                console.error('❌ Google Forms submission timeout after 8 seconds');
+                reject(new Error('Google Forms submission timeout - please check your internet connection'));
+            }, 8000); // 8 second timeout
+
+            fetch(googleFormUrl, {
+                method: 'POST',
+                body: googleFormData,
+                mode: 'no-cors'
+            }).then(() => {
+                clearTimeout(timeout);
+                console.log('✅ Google Forms submission completed (no-cors mode)');
+                resolve();
+            }).catch((error) => {
+                clearTimeout(timeout);
+                console.error('❌ Google Forms submission failed:', error);
+                reject(new Error(`Google Forms submission failed: ${error.message}`));
+            });
+        });
+    }
+
+    // Helper function to show success message
+    function showSuccessMessage(message) {
+        // Create and show success notification
+        const notification = createNotification(message, 'success');
+        document.body.appendChild(notification);
+        setTimeout(() => {
+            notification.remove();
+        }, 5000);
+    }
+
+    // Helper function to show error message
+    function showErrorMessage(message) {
+        // Create and show error notification
+        const notification = createNotification(message, 'error');
+        document.body.appendChild(notification);
+        setTimeout(() => {
+            notification.remove();
+        }, 7000);
+    }
+
+    // Helper function to create notification
+    function createNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: 500;
+            z-index: 10000;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideIn 0.3s ease-out;
+            ${type === 'success' ? 'background-color: #28a745;' : 'background-color: #dc3545;'}
+        `;
+        notification.textContent = message;
+        
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        return notification;
     }
 
     // ================= Scroll-to-top button =================
@@ -251,6 +455,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     createScrollToTopButton();
+
+    // ================= Consultancy Type Handler =================
+    const consultancyTypeSelect = document.getElementById('consultancyType');
+    const onlineFields = document.getElementById('onlineFields');
+    
+    if (consultancyTypeSelect && onlineFields) {
+        consultancyTypeSelect.addEventListener('change', function() {
+            if (this.value === 'online') {
+                onlineFields.style.display = 'block';
+                // Make date and time required for online consultations
+                document.getElementById('onlineDate').required = true;
+                document.getElementById('onlineTime').required = true;
+            } else {
+                onlineFields.style.display = 'none';
+                // Remove required attribute when not online
+                document.getElementById('onlineDate').required = false;
+                document.getElementById('onlineTime').required = false;
+            }
+        });
+    }
 
     // ================= Section animations =================
     const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
